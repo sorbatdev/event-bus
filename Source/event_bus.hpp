@@ -37,13 +37,12 @@ namespace eventbus
         std::shared_ptr<EventBus> g_instance;
     }
 
-    std::shared_ptr<EventBus> CreateEventbus()
+    void CreateEventbus()
     {
         if (nullptr == internal_::g_instance)
         {
             internal_::g_instance = std::make_shared<EventBus>();
         }
-        return internal_::g_instance;
     }
 
     template<EngineEvent EventType, typename... Args>
