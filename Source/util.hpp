@@ -15,8 +15,8 @@ namespace eventbus
 {
     inline constexpr int64_t StrHash64(char const* t_str)
     {
-        int64_t p = 31;
-        int64_t m = 1'000'000'009;
+        int64_t const p = 31;
+        int64_t const m = 1'000'000'009;
         int64_t power_of_p = 1;
         int64_t hash_val = 0;
 
@@ -37,7 +37,7 @@ namespace eventbus
     int64_t TypeHash()
     {
         std::string const name = typeid(T).name();
-        int64_t const    id = StrHash64(name.c_str());
+        int64_t     const id   = StrHash64(name.c_str());
 
         return id;
     }
