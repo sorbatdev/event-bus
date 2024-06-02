@@ -21,11 +21,26 @@ int main()
 
     SUB_TO_EVENT_FREE_FUN(print_event, PrintMessage);
 
-    auto l = [](print_event& t_event)
-    {
-        std::cout << t_event.m_msg << " A LAMBDA!" << std::endl;
-    };
-    eventbus::EventBus::SubscribeToEvent(eventbus::Delegate<void(print_event&)>::From(l));
+    eventbus::EventBus::SubscribeToEvent(eventbus::Delegate<void(print_event&)>::From(
+        [](print_event& t_event)
+        {
+            std::cout << t_event.m_msg << " A LAMBDA!" << std::endl;
+        }
+        )
+    );
 
+    int a = 3;
+    eventbus::EventBus::SubscribeToEvent(eventbus::Delegate<void(print_event&)>::From(
+        [&a](print_event& t_event)
+        {
+            std::cout << t_event.m_msg << " A LAMBDA! " << a << std::endl;
+        }
+        )
+    );
+
+    eventbus::EventBus::RaiseEvent<print_event>("Hello from eventbus!");
+
+    // Capturing lambdas also work with references.
+    a = 4;
     eventbus::EventBus::RaiseEvent<print_event>("Hello from eventbus!");
 }
