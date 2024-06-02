@@ -8,6 +8,8 @@
 #include <type_traits>
 #include <cstdint>
 #include <concepts>
+#include <utility>
+#include <functional>
 
 namespace eventbus
 {
